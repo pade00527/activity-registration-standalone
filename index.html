@@ -1169,13 +1169,25 @@ window.downloadCertificateText = async function (code) {
   var text = lines.join('\n');
   var filename = '感謝狀_' + rec.groupName + '_' + rec.code + '.txt';
 
-  try {
-    var downloads = await claude.use('downloads');
-    if (!downloads) { alert('此檢視環境不支援檔案下載。'); return; }
-    await downloads.save({ filename: filename, data: text });
-  } catch (e) {
-    if (e && e.code !== 'declined') alert('下載失敗：' + (e && e.message ? e.message : '請稍後再試'));
+  if (window.claude && typeof window.claude.use === 'function') {
+    try {
+      var downloads = await window.claude.use('downloads');
+      if (downloads) { await downloads.save({ filename: filename, data: text }); return; }
+    } catch (e) {
+      if (e && e.code === 'declined') return;
+      // fall through to the plain-browser download below
+    }
   }
+
+  var blob = new Blob([text], { type: 'text/plain;charset=utf-8' });
+  var url = URL.createObjectURL(blob);
+  var a = document.createElement('a');
+  a.href = url;
+  a.download = filename;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
 };
 
 window.showEditForm = function (code) {
