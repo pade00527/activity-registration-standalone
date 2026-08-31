@@ -1,0 +1,1365 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<title>八德教養院活動登記</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@500;700&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --paper: #f7f5ee;
+  --card: #ffffff;
+  --card-alt: #f1efe4;
+  --border: #dedac6;
+  --ink: #20281f;
+  --muted: #6f7a68;
+  --accent: #3c6e50;
+  --accent-deep: #24503a;
+  --accent-soft: #e7efe6;
+  --warn: #a8721f;
+  --warn-soft: #f7ecd8;
+  --info: #3a628f;
+  --info-soft: #e4edf5;
+  --danger: #b23b30;
+  --danger-soft: #f8e6e3;
+  --success: #3c6e50;
+  --success-soft: #e3efe6;
+  --shadow: 0 1px 2px rgba(32,40,31,0.06), 0 4px 16px rgba(32,40,31,0.06);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #141b16;
+    --card: #1c2620;
+    --card-alt: #212b24;
+    --border: #2d3a32;
+    --ink: #eef2ec;
+    --muted: #93a297;
+    --accent: #5fae83;
+    --accent-deep: #7fc79c;
+    --accent-soft: #1f3327;
+    --warn: #d9a441;
+    --warn-soft: #332811;
+    --info: #6ea3d6;
+    --info-soft: #1c2c3a;
+    --danger: #e0685a;
+    --danger-soft: #3a201d;
+    --success: #5fae83;
+    --success-soft: #1f3327;
+    --shadow: 0 1px 2px rgba(0,0,0,0.35), 0 4px 16px rgba(0,0,0,0.3);
+  }
+}
+:root[data-theme="dark"] {
+  --paper: #141b16;
+  --card: #1c2620;
+  --card-alt: #212b24;
+  --border: #2d3a32;
+  --ink: #eef2ec;
+  --muted: #93a297;
+  --accent: #5fae83;
+  --accent-deep: #7fc79c;
+  --accent-soft: #1f3327;
+  --warn: #d9a441;
+  --warn-soft: #332811;
+  --info: #6ea3d6;
+  --info-soft: #1c2c3a;
+  --danger: #e0685a;
+  --danger-soft: #3a201d;
+  --success: #5fae83;
+  --success-soft: #1f3327;
+  --shadow: 0 1px 2px rgba(0,0,0,0.35), 0 4px 16px rgba(0,0,0,0.3);
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: "Noto Sans TC", "Microsoft JhengHei", "PingFang TC", sans-serif;
+  line-height: 1.6;
+}
+
+h1, h2, h3 { font-family: "Noto Serif TC", "Noto Sans TC", serif; text-wrap: balance; }
+
+.site-header {
+  background: var(--accent-deep);
+  color: #f4f7f2;
+  padding: 28px 20px 22px;
+  text-align: center;
+}
+.site-header .eyebrow {
+  font-size: 0.78rem;
+  letter-spacing: 0.12em;
+  opacity: 0.75;
+  margin: 0 0 4px;
+}
+.site-header h1 {
+  margin: 0;
+  font-size: 1.6rem;
+  font-weight: 700;
+}
+.site-header p {
+  margin: 6px 0 0;
+  font-size: 0.9rem;
+  opacity: 0.85;
+}
+
+.nav {
+  max-width: 620px;
+  margin: -18px auto 0;
+  padding: 0 20px;
+  position: relative;
+  z-index: 2;
+}
+.nav-inner {
+  display: flex;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 4px;
+  box-shadow: var(--shadow);
+  gap: 4px;
+}
+.nav-inner button {
+  flex: 1;
+  border: none;
+  background: transparent;
+  color: var(--muted);
+  font-family: inherit;
+  font-size: 0.9rem;
+  font-weight: 700;
+  padding: 10px 14px;
+  border-radius: 999px;
+  cursor: pointer;
+}
+.nav-inner button.active { background: var(--accent); color: #fff; }
+
+.wrap {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 32px 16px 60px;
+}
+.wrap.wide { max-width: 1080px; }
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 20px 22px;
+  margin-bottom: 20px;
+  box-shadow: var(--shadow);
+}
+.card h2 {
+  margin-top: 0;
+  font-size: 1.08rem;
+  color: var(--accent-deep);
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 10px;
+}
+:root[data-theme="dark"] .card h2, .card h2 { color: var(--accent-deep); }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .card h2 { color: var(--accent); } }
+:root[data-theme="dark"] .card h2 { color: var(--accent); }
+
+label.field-label {
+  display: block;
+  font-weight: 700;
+  margin: 14px 0 6px;
+  font-size: 0.92rem;
+}
+
+.hint { font-size: 0.85rem; color: var(--muted); margin: -2px 0 8px; }
+
+input[type="text"], input[type="number"], input[type="date"], input[type="time"],
+input[type="password"], textarea, select {
+  width: 100%;
+  padding: 10px 11px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  font-size: 0.98rem;
+  font-family: inherit;
+  background: var(--paper);
+  color: var(--ink);
+}
+input:focus, textarea:focus, select:focus {
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
+}
+textarea { min-height: 74px; resize: vertical; }
+
+.choice-row { display: flex; flex-wrap: wrap; gap: 10px; }
+.choice-row label {
+  display: flex; align-items: center; gap: 6px;
+  border: 1px solid var(--border);
+  padding: 8px 14px;
+  border-radius: 999px;
+  cursor: pointer;
+  font-weight: 400;
+  background: var(--card-alt);
+}
+.choice-row input { margin: 0; }
+
+.time-inputs { display: flex; gap: 10px; align-items: center; margin-top: 8px; }
+.time-inputs input { width: auto; flex: 1; }
+
+.plate-grid { display: flex; flex-direction: column; gap: 8px; }
+.plate-grid .plate-empty-hint { color: var(--muted); font-size: 0.85rem; }
+.parking-car-row { display: flex; gap: 8px; align-items: center; }
+.parking-car-row .parking-car-label { flex-shrink: 0; width: 56px; font-size: 0.85rem; color: var(--muted); }
+.parking-car-row input { flex: 1.4; width: auto; }
+.parking-car-row select { flex: 1; width: auto; }
+
+.sub-panel {
+  border-left: 3px solid var(--accent);
+  padding: 10px 14px;
+  margin-top: 10px;
+  background: var(--accent-soft);
+  border-radius: 0 8px 8px 0;
+  display: none;
+}
+.sub-panel.show { display: block; }
+
+button {
+  cursor: pointer;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 20px;
+  font-size: 0.98rem;
+  font-weight: 700;
+  font-family: inherit;
+}
+.btn-primary { background: var(--accent); color: #fff; width: 100%; }
+.btn-primary:hover { background: var(--accent-deep); }
+.btn-secondary { background: var(--accent-soft); color: var(--accent-deep); }
+:root[data-theme="dark"] .btn-secondary { color: var(--accent); }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .btn-secondary { color: var(--accent); } }
+.btn-danger { background: var(--danger-soft); color: var(--danger); }
+.btn-danger:hover { background: var(--danger); color: #fff; }
+.btn-sm { padding: 6px 11px; font-size: 0.78rem; }
+
+.error-box {
+  background: var(--danger-soft);
+  color: var(--danger);
+  border: 1px solid var(--danger);
+  border-radius: 8px;
+  padding: 10px 14px;
+  margin-bottom: 14px;
+  display: none;
+}
+.error-box.show { display: block; }
+.error-box ul { margin: 0; padding-left: 18px; }
+
+.success-box {
+  background: var(--success-soft);
+  border: 1px solid var(--success);
+  border-radius: 10px;
+  padding: 22px;
+  text-align: center;
+}
+.success-box .code {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--accent-deep);
+  letter-spacing: 2px;
+  margin: 10px 0;
+  font-variant-numeric: tabular-nums;
+}
+:root[data-theme="dark"] .success-box .code { color: var(--accent); }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .success-box .code { color: var(--accent); } }
+
+.tabs { display: flex; gap: 8px; margin-bottom: 16px; }
+.tabs button {
+  flex: 1;
+  background: var(--card);
+  border: 1px solid var(--border);
+  color: var(--muted);
+}
+.tabs button.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+
+.status-badge {
+  display: inline-block;
+  padding: 3px 11px;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+.status-pending { background: var(--warn-soft); color: var(--warn); }
+.status-confirmed { background: var(--success-soft); color: var(--success); }
+.status-completed { background: var(--info-soft); color: var(--info); }
+.status-cancelled { background: var(--card-alt); color: var(--muted); }
+
+.status-select {
+  width: auto;
+  padding: 5px 10px;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  border: 1px solid transparent;
+  cursor: pointer;
+}
+.status-select.status-pending { background: var(--warn-soft); color: var(--warn); }
+.status-select.status-confirmed { background: var(--success-soft); color: var(--success); }
+.status-select.status-completed { background: var(--info-soft); color: var(--info); }
+.status-select.status-cancelled { background: var(--card-alt); color: var(--muted); }
+
+.table-scroll { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; }
+th, td { text-align: left; padding: 10px; border-bottom: 1px solid var(--border); font-size: 0.88rem; white-space: nowrap; }
+th { color: var(--muted); font-weight: 400; }
+
+.detail-row { display: flex; justify-content: space-between; gap: 16px; padding: 7px 0; border-bottom: 1px dashed var(--border); font-size: 0.92rem; }
+.detail-row span:first-child { color: var(--muted); flex-shrink: 0; }
+.detail-row span:last-child { text-align: right; }
+
+.calendar-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; }
+.calendar-legend { display: flex; flex-wrap: wrap; gap: 12px; font-size: 0.82rem; color: var(--muted); margin-bottom: 14px; }
+.calendar-legend span { display: flex; align-items: center; gap: 5px; }
+.dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
+.dot-pending { background: var(--warn); }
+.dot-confirmed { background: var(--success); }
+.dot-completed { background: var(--info); }
+.dot-cancelled { background: var(--muted); }
+
+.calendar-table { width: 100%; border-collapse: collapse; table-layout: fixed; }
+.calendar-table th { text-align: center; padding: 6px 2px; font-size: 0.8rem; color: var(--muted); border-bottom: 1px solid var(--border); white-space: normal; }
+.calendar-table td { vertical-align: top; border: 1px solid var(--border); height: 92px; padding: 4px; font-size: 0.75rem; white-space: normal; }
+.calendar-table td.other-month { background: var(--card-alt); color: var(--muted); opacity: 0.6; }
+.calendar-table td.today { background: var(--accent-soft); }
+.cal-daynum { font-size: 0.8rem; font-weight: 700; margin-bottom: 3px; font-variant-numeric: tabular-nums; }
+.cal-event { display: block; border-radius: 4px; padding: 2px 5px; margin-bottom: 2px; color: #fff; font-size: 0.72rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; cursor: pointer; }
+.cal-event.st-pending { background: var(--warn); }
+.cal-event.st-confirmed { background: var(--success); }
+.cal-event.st-completed { background: var(--info); }
+.cal-event.st-cancelled { background: var(--muted); text-decoration: line-through; }
+
+@media (max-width: 600px) {
+  .calendar-table td { height: 64px; font-size: 0.68rem; }
+  .cal-event { font-size: 0.65rem; }
+}
+
+.hidden { display: none !important; }
+.login-box { max-width: 360px; margin: 40px auto; }
+.notify-card { background: var(--warn-soft); border-color: var(--warn); }
+.notify-card b { font-variant-numeric: tabular-nums; }
+
+.site-footer { text-align: center; padding: 24px 16px 32px; color: var(--muted); font-size: 0.8rem; line-height: 1.7; }
+.logout-link { font-size: 0.85rem; color: var(--muted); text-decoration: underline; cursor: pointer; background: none; padding: 0; font-weight: 400; }
+
+.admin-head { display: flex; align-items: baseline; justify-content: space-between; flex-wrap: wrap; gap: 8px; margin-bottom: 4px; }
+
+#printListWrap { margin-top: 20px; }
+#printListWrap > button { margin-bottom: 10px; }
+
+@media print {
+  body * { visibility: hidden; }
+  #printListArea, #printListArea * { visibility: visible; }
+  #printListArea { position: absolute; left: 0; top: 0; width: 100%; }
+}
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <p class="eyebrow">財團法人私立八德教養院</p>
+  <h1>團體活動登記系統</h1>
+  <p>安排到院活動前，請先完成登記；社工組將於後台確認並回覆。</p>
+</header>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <button id="navRegister" class="active">登記表單</button>
+    <button id="navAdmin">後台管理</button>
+  </div>
+</nav>
+
+<!-- ============ 前台登記 ============ -->
+<div class="wrap" id="viewRegister">
+  <div class="error-box" id="errBoxNew"><ul id="errListNew"></ul></div>
+
+  <form id="regForm">
+    <div class="card">
+      <h2>基本資訊</h2>
+      <label class="field-label">團體名稱 *</label>
+      <input type="text" id="groupName" placeholder="請輸入團體名稱">
+      <label class="field-label">團體人數 *</label>
+      <div class="time-inputs">
+        <input type="number" id="groupSizeMin" min="1" placeholder="最少人數"> <span>至</span>
+        <input type="number" id="groupSizeMax" min="1" placeholder="最多人數">
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>活動時間</h2>
+      <label class="field-label">活動日期 *</label>
+      <input type="date" id="activityDate">
+      <label class="field-label">時段 *</label>
+      <div class="choice-row">
+        <label><input type="radio" name="timeSlot" value="morning"> 上午 (09:00-11:00)</label>
+        <label><input type="radio" name="timeSlot" value="afternoon"> 下午 (14:00-15:30)</label>
+      </div>
+      <div class="sub-panel" id="weekendPanel">
+        <div class="hint">活動日為假日，如需支援人力請填寫</div>
+        <label class="field-label">假日支援人力（可不填）</label>
+        <input type="text" id="supportStaff" placeholder="請填寫需要的支援人力，如無需求可留空">
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>活動性質 *（可複選）</h2>
+      <div class="choice-row">
+        <label><input type="checkbox" class="actType" value="唱歌"> 唱歌</label>
+        <label><input type="checkbox" class="actType" value="跳舞"> 跳舞</label>
+        <label><input type="checkbox" class="actType" value="互動"> 互動</label>
+      </div>
+      <label class="field-label">其他（自行填寫）</label>
+      <input type="text" id="activityTypeOther" placeholder="若上述皆無符合項目請自行填寫">
+    </div>
+
+    <div class="card">
+      <h2>是否需要感謝狀 *</h2>
+      <div class="choice-row">
+        <label><input type="radio" name="needCertificate" value="no"> 否</label>
+        <label><input type="radio" name="needCertificate" value="yes"> 是</label>
+      </div>
+      <div class="sub-panel" id="certPanel">
+        <label class="field-label">張數（可不填）</label>
+        <input type="number" id="certificateCount" min="1" placeholder="請填寫需要的感謝狀張數">
+        <label class="field-label">抬頭（可不填，依張數顯示對應欄位）</label>
+        <div class="plate-grid" id="certificateTitlesContainer"></div>
+        <label class="field-label">感謝狀內容需求（如需登打特定文字請說明）</label>
+        <textarea id="certificateContent" placeholder="請說明感謝狀內容需登打之文字"></textarea>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>是否捐款或捐物 *</h2>
+      <div class="choice-row">
+        <label><input type="radio" name="hasDonation" value="no"> 否</label>
+        <label><input type="radio" name="hasDonation" value="yes"> 是</label>
+      </div>
+      <div class="sub-panel" id="donationPanel">
+        <label class="field-label"><input type="checkbox" id="donationMoney"> 捐款</label>
+        <div class="sub-panel" id="donationMoneyReceiptPanel" style="margin-left:20px;">
+          <label><input type="checkbox" id="donationMoneyReceipt"> 需要收據</label>
+          <input type="text" id="donationMoneyNote" placeholder="備註（可不填）" style="margin-top:8px;">
+        </div>
+        <label class="field-label"><input type="checkbox" id="donationGoods"> 捐物</label>
+        <div class="sub-panel" id="donationGoodsReceiptPanel" style="margin-left:20px;">
+          <label><input type="checkbox" id="donationGoodsReceipt"> 需要收據</label>
+          <input type="text" id="donationGoodsNote" placeholder="備註（可不填）" style="margin-top:8px;">
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>是否停車於本機構 *</h2>
+      <div class="choice-row">
+        <label><input type="radio" name="needParking" value="no"> 否</label>
+        <label><input type="radio" name="needParking" value="yes"> 是</label>
+      </div>
+      <div class="sub-panel" id="parkingPanel">
+        <div class="hint">本院保全會進行管制</div>
+        <label class="field-label">停車數量 *</label>
+        <input type="number" id="parkingCount" min="0" placeholder="請填寫停車數量">
+        <label class="field-label">車輛資訊（車牌可不填，停放位置為必填）</label>
+        <div class="plate-grid" id="plateNumbersContainer"></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>備註</h2>
+      <label class="field-label">備註（可自行填打想要的內容或注意事項）</label>
+      <textarea id="remark" placeholder="如有其他需求或注意事項，請填寫於此"></textarea>
+    </div>
+
+    <button type="submit" class="btn-primary">送出登記</button>
+  </form>
+
+  <div class="card success-box hidden" id="successBox">
+    <div>登記成功！您的登記代號為</div>
+    <div class="code" id="successCode"></div>
+    <div class="hint">請自行留存此代號。如需查詢或修改登記內容，請洽社工組後台處理</div>
+  </div>
+</div>
+
+<!-- ============ 後台管理 ============ -->
+<div class="wrap wide hidden" id="viewAdmin">
+  <div class="card login-box" id="loginBox">
+    <h2>後台登入</h2>
+    <div class="error-box" id="loginErrBox"><ul id="loginErrList"></ul></div>
+    <label class="field-label">密碼</label>
+    <input type="password" id="loginPassword" placeholder="請輸入後台密碼">
+    <button class="btn-primary" id="loginBtn" style="margin-top:14px;">登入</button>
+    <p class="hint" style="margin-top:12px;">預設密碼：sw2026（資料儲存於本機瀏覽器，僅供單機使用）</p>
+  </div>
+
+  <div id="adminContent" class="hidden">
+    <div class="admin-head">
+      <h2 style="border:none;padding:0;margin:0;color:var(--accent-deep);">社工組 - 活動登記管理</h2>
+      <button class="logout-link" id="logoutLink">登出</button>
+    </div>
+
+    <div class="card notify-card" id="notifyCard" style="display:none;">
+      <div id="notifyText"></div>
+    </div>
+
+    <div class="tabs">
+      <button id="viewTabList" class="active">清單檢視</button>
+      <button id="viewTabCalendar">行事曆檢視</button>
+    </div>
+
+    <div class="card" id="listView">
+      <div class="admin-head">
+        <h2 style="border:none;padding:0;margin:0;">登記清單</h2>
+        <button class="btn-secondary" id="printListBtn">列印清單</button>
+      </div>
+      <div id="listContainer" class="table-scroll"></div>
+    </div>
+
+    <div id="printListWrap" class="hidden">
+      <button class="btn-secondary" id="hidePrintListBtn">關閉預覽</button>
+      <div id="printListArea"></div>
+    </div>
+
+    <div class="card hidden" id="calendarView">
+      <div class="calendar-header">
+        <button class="btn-secondary" id="calPrevBtn">‹ 上個月</button>
+        <h2 id="calTitle" style="margin:0;border:none;padding:0;"></h2>
+        <button class="btn-secondary" id="calNextBtn">下個月 ›</button>
+      </div>
+      <div class="calendar-legend">
+        <span><i class="dot dot-pending"></i>聯繫中</span>
+        <span><i class="dot dot-confirmed"></i>確認</span>
+        <span><i class="dot dot-completed"></i>完成</span>
+        <span><i class="dot dot-cancelled"></i>取消</span>
+      </div>
+      <div class="table-scroll" id="calendarGrid"></div>
+    </div>
+  </div>
+
+  <div id="detailContainer"></div>
+</div>
+
+<footer class="site-footer">
+  <div>&copy; 財團法人私立八德教養院 版權所有</div>
+</footer>
+
+<script>
+(function () {
+'use strict';
+
+// ---------------------------------------------------------------------
+// Data layer (replaces the original Express + JSON-file backend; data now
+// lives in this browser's localStorage, mirroring the old db.json shape)
+// ---------------------------------------------------------------------
+var STORAGE_KEY = 'huade-activity-registrations-v1';
+var ADMIN_SESSION_KEY = 'huade-admin-session-v1';
+var ADMIN_PASSWORD = 'sw2026';
+
+var ACTIVITY_TYPES = ['唱歌', '跳舞', '互動'];
+var PARKING_GATES = ['front', 'back'];
+var STATUS_VALUES = ['pending', 'confirmed', 'cancelled', 'completed'];
+var STATUS_LABELS = { pending: '聯繫中', confirmed: '確認', cancelled: '取消', completed: '完成' };
+var TIME_WINDOWS = { morning: ['09:00', '11:00'], afternoon: ['14:00', '15:30'] };
+
+function loadRegs() {
+  try {
+    var raw = localStorage.getItem(STORAGE_KEY);
+    return raw ? JSON.parse(raw) : [];
+  } catch (e) { return []; }
+}
+function saveRegs(regs) {
+  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(regs)); } catch (e) { /* storage unavailable */ }
+}
+
+function pad(n, len) { return String(n).padStart(len, '0'); }
+
+function toMinguoDateParts(dateStr) {
+  var parts = dateStr.split('-').map(Number);
+  var y = parts[0], m = parts[1], d = parts[2];
+  return { yyy: pad(y - 1911, 3), mmdd: pad(m, 2) + pad(d, 2) };
+}
+function todayDateString() {
+  var now = new Date();
+  return now.getFullYear() + '-' + pad(now.getMonth() + 1, 2) + '-' + pad(now.getDate(), 2);
+}
+function generateCode(regs) {
+  var parts = toMinguoDateParts(todayDateString());
+  var prefix = parts.yyy + parts.mmdd;
+  var sameDay = regs.filter(function (r) { return r.code.indexOf(prefix) === 0; });
+  var serial = sameDay.length + 1;
+  var code = prefix + pad(serial, 2);
+  while (regs.some(function (r) { return r.code === code; })) {
+    serial += 1;
+    code = prefix + pad(serial, 2);
+  }
+  if (serial > 99) throw new Error('當日登記已達上限（99筆）');
+  return code;
+}
+function isWeekend(dateStr) {
+  if (!dateStr) return false;
+  var day = new Date(dateStr + 'T00:00:00').getDay();
+  return day === 0 || day === 6;
+}
+
+function validatePayload(body, opts) {
+  opts = opts || {};
+  var errors = [];
+  if (!body.groupName || !String(body.groupName).trim()) errors.push('請填寫團體名稱');
+  var sizeMin = Number(body.groupSizeMin);
+  var sizeMax = Number(body.groupSizeMax);
+  if (!body.groupSizeMin || sizeMin <= 0) errors.push('請填寫團體人數下限');
+  if (!body.groupSizeMax || sizeMax <= 0) errors.push('請填寫團體人數上限');
+  if (body.groupSizeMin && body.groupSizeMax && sizeMax < sizeMin) errors.push('團體人數上限不可小於下限');
+  if (!body.activityDate) errors.push('請選擇活動日期');
+  if (opts.freeTime) {
+    if (!body.startTime || !body.endTime) errors.push('請填寫活動起訖時間');
+    else if (body.startTime >= body.endTime) errors.push('結束時間必須晚於開始時間');
+  } else if (!body.timeSlot || !TIME_WINDOWS[body.timeSlot]) {
+    errors.push('請選擇上午或下午時段');
+  }
+  var types = Array.isArray(body.activityTypes) ? body.activityTypes : [];
+  if (types.length === 0 && !body.activityTypeOther) errors.push('請至少選擇一項活動性質');
+  if (body.needCertificate === undefined) errors.push('請選擇是否需要感謝狀');
+  if (body.hasDonation === undefined) errors.push('請選擇是否捐款或捐物');
+  if (body.hasDonation === true) {
+    if (!body.donationMoney && !body.donationGoods) errors.push('請至少選擇捐款或捐物其中一項');
+  }
+  if (body.needParking === undefined) errors.push('請選擇是否停車於本機構');
+  if (body.needParking === true) {
+    var parkingCount = Number(body.parkingCount) || 0;
+    if (parkingCount > 0) {
+      var cars = Array.isArray(body.parkingCars) ? body.parkingCars.slice(0, parkingCount) : [];
+      var allGatesChosen = cars.length === parkingCount && cars.every(function (c) { return c && PARKING_GATES.indexOf(c.gate) !== -1; });
+      if (!allGatesChosen) errors.push('請選擇每一輛車要停前門或後門');
+    }
+  }
+  return errors;
+}
+
+function sanitizeRecord(body, opts) {
+  opts = opts || {};
+  var types = Array.isArray(body.activityTypes) ? body.activityTypes.filter(function (t) { return ACTIVITY_TYPES.indexOf(t) !== -1; }) : [];
+  var timeSlot = opts.freeTime ? (body.startTime < '12:00' ? 'morning' : 'afternoon') : body.timeSlot;
+  var win = TIME_WINDOWS[body.timeSlot] || ['', ''];
+  var startTime = opts.freeTime ? body.startTime : win[0];
+  var endTime = opts.freeTime ? body.endTime : win[1];
+  var certCount = body.needCertificate ? (Number(body.certificateCount) || 0) : 0;
+  var parkingCount = body.needParking ? (Number(body.parkingCount) || 0) : 0;
+  return {
+    groupName: String(body.groupName || '').trim(),
+    groupSizeMin: Number(body.groupSizeMin) || 0,
+    groupSizeMax: Number(body.groupSizeMax) || 0,
+    activityDate: body.activityDate,
+    activityLocation: body.activityLocation ? String(body.activityLocation).trim() : '',
+    timeSlot: timeSlot,
+    startTime: startTime,
+    endTime: endTime,
+    activityTypes: types,
+    activityTypeOther: body.activityTypeOther ? String(body.activityTypeOther).trim() : '',
+    needCertificate: !!body.needCertificate,
+    certificateCount: certCount,
+    certificateTitles: body.needCertificate
+      ? (Array.isArray(body.certificateTitles) ? body.certificateTitles : []).slice(0, certCount).map(function (t) { return String(t || '').trim(); })
+      : [],
+    certificateContent: body.needCertificate ? String(body.certificateContent || '').trim() : '',
+    hasDonation: !!body.hasDonation,
+    donationMoney: body.hasDonation ? !!body.donationMoney : false,
+    donationMoneyReceipt: body.hasDonation && body.donationMoney ? !!body.donationMoneyReceipt : false,
+    donationMoneyNote: body.hasDonation && body.donationMoney ? String(body.donationMoneyNote || '').trim() : '',
+    donationGoods: body.hasDonation ? !!body.donationGoods : false,
+    donationGoodsReceipt: body.hasDonation && body.donationGoods ? !!body.donationGoodsReceipt : false,
+    donationGoodsNote: body.hasDonation && body.donationGoods ? String(body.donationGoodsNote || '').trim() : '',
+    needParking: !!body.needParking,
+    parkingCount: parkingCount,
+    parkingCars: body.needParking
+      ? (Array.isArray(body.parkingCars) ? body.parkingCars : []).slice(0, parkingCount).map(function (c) { return { plate: String((c && c.plate) || '').trim(), gate: c && c.gate }; })
+      : [],
+    supportStaff: isWeekend(body.activityDate) ? String(body.supportStaff || '').trim() : '',
+    remark: body.remark ? String(body.remark).trim() : ''
+  };
+}
+
+function escapeHtml(str) {
+  var div = document.createElement('div');
+  div.textContent = str || '';
+  return div.innerHTML;
+}
+
+// ---------------------------------------------------------------------
+// Top-level nav
+// ---------------------------------------------------------------------
+var navRegister = document.getElementById('navRegister');
+var navAdmin = document.getElementById('navAdmin');
+var viewRegister = document.getElementById('viewRegister');
+var viewAdmin = document.getElementById('viewAdmin');
+
+navRegister.addEventListener('click', function () {
+  navRegister.classList.add('active'); navAdmin.classList.remove('active');
+  viewRegister.classList.remove('hidden'); viewAdmin.classList.add('hidden');
+});
+navAdmin.addEventListener('click', function () {
+  navAdmin.classList.add('active'); navRegister.classList.remove('active');
+  viewAdmin.classList.remove('hidden'); viewRegister.classList.add('hidden');
+  checkSession();
+});
+
+// ---------------------------------------------------------------------
+// Public registration form
+// ---------------------------------------------------------------------
+document.querySelectorAll('input[name="needCertificate"]').forEach(function (el) {
+  el.addEventListener('change', function () {
+    var show = el.value === 'yes' && el.checked;
+    document.getElementById('certPanel').classList.toggle('show', show);
+    if (show) renderCertificateTitles('certificateTitlesContainer', document.getElementById('certificateCount').value);
+  });
+});
+document.getElementById('certificateCount').addEventListener('input', function () {
+  renderCertificateTitles('certificateTitlesContainer', document.getElementById('certificateCount').value);
+});
+
+function renderCertificateTitles(containerId, count, titles) {
+  var container = document.getElementById(containerId);
+  var existing = Array.from(container.querySelectorAll('.certTitleInput')).map(function (i) { return i.value; });
+  var merged = existing.length ? existing : (titles || []);
+  container.innerHTML = '';
+  var n = Math.max(0, parseInt(count, 10) || 0);
+  if (n === 0) {
+    var hint = document.createElement('div');
+    hint.className = 'plate-empty-hint';
+    hint.textContent = '請填寫張數後顯示對應抬頭欄位';
+    container.appendChild(hint);
+    return;
+  }
+  for (var i = 0; i < n; i++) {
+    var input = document.createElement('input');
+    input.type = 'text';
+    input.className = 'certTitleInput';
+    input.placeholder = '第 ' + (i + 1) + ' 張抬頭（可不填）';
+    input.value = merged[i] || '';
+    container.appendChild(input);
+  }
+}
+
+document.querySelectorAll('input[name="hasDonation"]').forEach(function (el) {
+  el.addEventListener('change', function () {
+    document.getElementById('donationPanel').classList.toggle('show', el.value === 'yes' && el.checked);
+  });
+});
+
+function renderParkingCars(containerId, count, cars) {
+  var container = document.getElementById(containerId);
+  var existing = Array.from(container.querySelectorAll('.parking-car-row')).map(function (row) {
+    return { plate: row.querySelector('.plateInput').value, gate: row.querySelector('.gateSelect').value };
+  });
+  var merged = existing.length ? existing : (cars || []);
+  container.innerHTML = '';
+  var n = Math.max(0, parseInt(count, 10) || 0);
+  if (n === 0) {
+    var hint = document.createElement('div');
+    hint.className = 'plate-empty-hint';
+    hint.textContent = '請先填寫停車數量';
+    container.appendChild(hint);
+    return;
+  }
+  for (var i = 0; i < n; i++) {
+    var prev = merged[i] || {};
+    var row = document.createElement('div');
+    row.className = 'parking-car-row';
+    row.innerHTML =
+      '<span class="parking-car-label">第 ' + (i + 1) + ' 輛</span>' +
+      '<input type="text" class="plateInput" placeholder="車牌（可不填）" value="' + escapeHtml(prev.plate || '') + '">' +
+      '<select class="gateSelect">' +
+      '<option value="" ' + (!prev.gate ? 'selected' : '') + '>請選擇停放位置</option>' +
+      '<option value="front" ' + (prev.gate === 'front' ? 'selected' : '') + '>前門</option>' +
+      '<option value="back" ' + (prev.gate === 'back' ? 'selected' : '') + '>後門</option>' +
+      '</select>';
+    container.appendChild(row);
+  }
+}
+
+document.querySelectorAll('input[name="needParking"]').forEach(function (el) {
+  el.addEventListener('change', function () {
+    var show = el.value === 'yes' && el.checked;
+    document.getElementById('parkingPanel').classList.toggle('show', show);
+    if (show) renderParkingCars('plateNumbersContainer', document.getElementById('parkingCount').value);
+  });
+});
+document.getElementById('parkingCount').addEventListener('input', function () {
+  renderParkingCars('plateNumbersContainer', document.getElementById('parkingCount').value);
+});
+document.getElementById('activityDate').addEventListener('change', function () {
+  document.getElementById('weekendPanel').classList.toggle('show', isWeekend(document.getElementById('activityDate').value));
+});
+
+var donationMoney = document.getElementById('donationMoney');
+var donationGoods = document.getElementById('donationGoods');
+donationMoney.addEventListener('change', function () {
+  document.getElementById('donationMoneyReceiptPanel').classList.toggle('show', donationMoney.checked);
+});
+donationGoods.addEventListener('change', function () {
+  document.getElementById('donationGoodsReceiptPanel').classList.toggle('show', donationGoods.checked);
+});
+
+function collectFormData() {
+  var timeSlotEl = document.querySelector('input[name="timeSlot"]:checked');
+  var needCertEl = document.querySelector('input[name="needCertificate"]:checked');
+  var hasDonationEl = document.querySelector('input[name="hasDonation"]:checked');
+  var needParkingEl = document.querySelector('input[name="needParking"]:checked');
+  var activityTypes = Array.from(document.querySelectorAll('.actType:checked')).map(function (el) { return el.value; });
+
+  return {
+    groupName: document.getElementById('groupName').value,
+    groupSizeMin: document.getElementById('groupSizeMin').value,
+    groupSizeMax: document.getElementById('groupSizeMax').value,
+    activityDate: document.getElementById('activityDate').value,
+    timeSlot: timeSlotEl ? timeSlotEl.value : null,
+    supportStaff: document.getElementById('supportStaff').value,
+    activityTypes: activityTypes,
+    activityTypeOther: document.getElementById('activityTypeOther').value,
+    needCertificate: needCertEl ? needCertEl.value === 'yes' : undefined,
+    certificateCount: document.getElementById('certificateCount').value,
+    certificateTitles: Array.from(document.querySelectorAll('#certificateTitlesContainer .certTitleInput')).map(function (el) { return el.value; }),
+    certificateContent: document.getElementById('certificateContent').value,
+    hasDonation: hasDonationEl ? hasDonationEl.value === 'yes' : undefined,
+    donationMoney: donationMoney.checked,
+    donationMoneyReceipt: document.getElementById('donationMoneyReceipt').checked,
+    donationMoneyNote: document.getElementById('donationMoneyNote').value,
+    donationGoods: donationGoods.checked,
+    donationGoodsReceipt: document.getElementById('donationGoodsReceipt').checked,
+    donationGoodsNote: document.getElementById('donationGoodsNote').value,
+    needParking: needParkingEl ? needParkingEl.value === 'yes' : undefined,
+    parkingCount: document.getElementById('parkingCount').value,
+    parkingCars: Array.from(document.querySelectorAll('#plateNumbersContainer .parking-car-row')).map(function (row) {
+      return { plate: row.querySelector('.plateInput').value, gate: row.querySelector('.gateSelect').value };
+    }),
+    remark: document.getElementById('remark').value
+  };
+}
+
+function showErrors(boxId, listId, errors) {
+  var box = document.getElementById(boxId);
+  var list = document.getElementById(listId);
+  list.innerHTML = errors.map(function (e) { return '<li>' + escapeHtml(e) + '</li>'; }).join('');
+  box.classList.add('show');
+  box.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+function hideErrors(boxId) { document.getElementById(boxId).classList.remove('show'); }
+
+document.getElementById('regForm').addEventListener('submit', function (e) {
+  e.preventDefault();
+  hideErrors('errBoxNew');
+  var payload = collectFormData();
+  var errors = validatePayload(payload);
+  if (errors.length) { showErrors('errBoxNew', 'errListNew', errors); return; }
+
+  var regs = loadRegs();
+  var code;
+  try { code = generateCode(regs); }
+  catch (err) { showErrors('errBoxNew', 'errListNew', [err.message]); return; }
+
+  var now = new Date().toISOString();
+  var rec = Object.assign({ code: code }, sanitizeRecord(payload), {
+    status: 'pending', createdAt: now, updatedAt: now, editHistory: []
+  });
+  regs.push(rec);
+  saveRegs(regs);
+
+  document.getElementById('regForm').classList.add('hidden');
+  document.getElementById('successCode').textContent = code;
+  document.getElementById('successBox').classList.remove('hidden');
+});
+
+// ---------------------------------------------------------------------
+// Admin
+// ---------------------------------------------------------------------
+var loginBox = document.getElementById('loginBox');
+var adminContent = document.getElementById('adminContent');
+
+function getAdminSession() {
+  try { return sessionStorage.getItem(ADMIN_SESSION_KEY); } catch (e) { return null; }
+}
+function setAdminSession(value) {
+  try {
+    if (value) sessionStorage.setItem(ADMIN_SESSION_KEY, value);
+    else sessionStorage.removeItem(ADMIN_SESSION_KEY);
+  } catch (e) { /* storage unavailable; session won't persist across reloads */ }
+}
+
+function checkSession() {
+  if (getAdminSession() === '1') {
+    loginBox.classList.add('hidden');
+    adminContent.classList.remove('hidden');
+    loadList();
+  } else {
+    loginBox.classList.remove('hidden');
+    adminContent.classList.add('hidden');
+  }
+}
+
+document.getElementById('loginBtn').addEventListener('click', function () {
+  var password = document.getElementById('loginPassword').value;
+  if (password !== ADMIN_PASSWORD) {
+    var box = document.getElementById('loginErrBox');
+    document.getElementById('loginErrList').innerHTML = '<li>密碼錯誤</li>';
+    box.classList.add('show');
+    return;
+  }
+  document.getElementById('loginErrBox').classList.remove('show');
+  setAdminSession('1');
+  checkSession();
+});
+document.getElementById('loginPassword').addEventListener('keydown', function (e) {
+  if (e.key === 'Enter') document.getElementById('loginBtn').click();
+});
+
+document.getElementById('logoutLink').addEventListener('click', function () {
+  setAdminSession(null);
+  checkSession();
+});
+
+function statusLabel(status) {
+  if (status === 'confirmed') return '<span class="status-badge status-confirmed">確認</span>';
+  if (status === 'completed') return '<span class="status-badge status-completed">完成</span>';
+  if (status === 'cancelled') return '<span class="status-badge status-cancelled">取消</span>';
+  return '<span class="status-badge status-pending">聯繫中</span>';
+}
+function statusSelect(code, status) {
+  function opt(value, label) { return '<option value="' + value + '" ' + (status === value ? 'selected' : '') + '>' + label + '</option>'; }
+  return '<select class="status-select status-' + status + '" onchange="window.updateStatus(\'' + code + '\', this.value)">' +
+    opt('pending', '聯繫中') + opt('confirmed', '確認') + opt('cancelled', '取消') + opt('completed', '完成') + '</select>';
+}
+function listRemarkText(r) {
+  var parts = [];
+  if (r.supportStaff) parts.push('假日支援人力：' + escapeHtml(r.supportStaff));
+  if (r.remark) parts.push('備註：' + escapeHtml(r.remark));
+  return parts.length ? parts.join('｜') : '-';
+}
+function groupSizeText(r) { return (r.groupSizeMin === r.groupSizeMax ? r.groupSizeMin : (r.groupSizeMin + '-' + r.groupSizeMax)) + ' 人'; }
+function timeSlotText(r) { return (r.timeSlot === 'morning' ? '上午' : '下午') + ' ' + r.startTime + '-' + r.endTime; }
+function activityTypesText(r) { return [].concat(r.activityTypes, [r.activityTypeOther]).filter(Boolean).map(escapeHtml).join('、'); }
+
+function loadList() {
+  var regs = loadRegs().slice().sort(function (a, b) { return b.updatedAt.localeCompare(a.updatedAt); });
+
+  var needsAttention = regs.filter(function (r) { return r.status === 'pending'; });
+  var notifyCard = document.getElementById('notifyCard');
+  if (needsAttention.length > 0) {
+    notifyCard.style.display = 'block';
+    document.getElementById('notifyText').innerHTML = '目前有 <b>' + needsAttention.length + '</b> 筆登記聯繫中，請盡快處理。';
+  } else {
+    notifyCard.style.display = 'none';
+  }
+
+  var container = document.getElementById('listContainer');
+  if (regs.length === 0) {
+    container.innerHTML = '<p>目前尚無登記資料</p>';
+    window.__regs = regs;
+    renderCalendar();
+    return;
+  }
+
+  container.innerHTML =
+    '<table><thead><tr>' +
+    '<th>活動日期</th><th>時段</th><th>單位</th><th>活動性質</th><th>地點</th><th>活動單位人數</th><th>備註</th><th>狀態</th><th colspan="2"></th>' +
+    '</tr></thead><tbody>' +
+    regs.map(function (r) {
+      return '<tr>' +
+        '<td>' + r.activityDate + '</td>' +
+        '<td>' + timeSlotText(r) + '</td>' +
+        '<td>' + escapeHtml(r.groupName) + '</td>' +
+        '<td>' + activityTypesText(r) + '</td>' +
+        '<td>' + (r.activityLocation ? escapeHtml(r.activityLocation) : '-') + '</td>' +
+        '<td>' + groupSizeText(r) + '</td>' +
+        '<td>' + listRemarkText(r) + '</td>' +
+        '<td>' + statusSelect(r.code, r.status) + '</td>' +
+        '<td><button class="btn-secondary btn-sm" onclick="window.showEditForm(\'' + r.code + '\')">編輯</button></td>' +
+        '<td><button class="btn-secondary btn-sm" onclick="window.showDetail(\'' + r.code + '\')">查看</button></td>' +
+        '</tr>';
+    }).join('') +
+    '</tbody></table>';
+
+  window.__regs = regs;
+  renderCalendar();
+}
+
+document.getElementById('printListBtn').addEventListener('click', function () {
+  var regs = window.__regs || [];
+  var rows = regs.map(function (r) {
+    return '<tr>' +
+      '<td>' + r.activityDate + '</td><td>' + timeSlotText(r) + '</td><td>' + escapeHtml(r.groupName) + '</td>' +
+      '<td>' + activityTypesText(r) + '</td><td>' + (r.activityLocation ? escapeHtml(r.activityLocation) : '-') + '</td>' +
+      '<td>' + groupSizeText(r) + '</td><td>' + listRemarkText(r) + '</td></tr>';
+  }).join('');
+
+  document.getElementById('printListArea').innerHTML =
+    '<div class="card"><h2>登記清單</h2><table><thead><tr>' +
+    '<th>活動日期</th><th>時段</th><th>單位</th><th>活動性質</th><th>地點</th><th>活動單位人數</th><th>備註</th>' +
+    '</tr></thead><tbody>' + (rows || '<tr><td colspan="7">目前尚無登記資料</td></tr>') + '</tbody></table></div>';
+
+  document.getElementById('printListWrap').classList.remove('hidden');
+  document.getElementById('printListWrap').scrollIntoView({ behavior: 'smooth' });
+  try { window.print(); } catch (e) { /* some embedded contexts block this; the preview above still shows */ }
+});
+document.getElementById('hidePrintListBtn').addEventListener('click', function () {
+  document.getElementById('printListWrap').classList.add('hidden');
+});
+
+var viewTabList = document.getElementById('viewTabList');
+var viewTabCalendar = document.getElementById('viewTabCalendar');
+var listView = document.getElementById('listView');
+var calendarView = document.getElementById('calendarView');
+
+viewTabList.addEventListener('click', function () {
+  viewTabList.classList.add('active'); viewTabCalendar.classList.remove('active');
+  listView.classList.remove('hidden'); calendarView.classList.add('hidden');
+});
+viewTabCalendar.addEventListener('click', function () {
+  viewTabCalendar.classList.add('active'); viewTabList.classList.remove('active');
+  calendarView.classList.remove('hidden'); listView.classList.add('hidden');
+  renderCalendar();
+});
+
+var calState = (function () { var now = new Date(); return { year: now.getFullYear(), month: now.getMonth() }; })();
+
+document.getElementById('calPrevBtn').addEventListener('click', function () {
+  calState.month -= 1;
+  if (calState.month < 0) { calState.month = 11; calState.year -= 1; }
+  renderCalendar();
+});
+document.getElementById('calNextBtn').addEventListener('click', function () {
+  calState.month += 1;
+  if (calState.month > 11) { calState.month = 0; calState.year += 1; }
+  renderCalendar();
+});
+
+function statusClass(status) {
+  if (status === 'confirmed') return 'st-confirmed';
+  if (status === 'completed') return 'st-completed';
+  if (status === 'cancelled') return 'st-cancelled';
+  return 'st-pending';
+}
+
+function renderCalendar() {
+  var grid = document.getElementById('calendarGrid');
+  if (!grid || !window.__regs) return;
+
+  var year = calState.year, month = calState.month;
+  document.getElementById('calTitle').textContent = year + ' 年 ' + (month + 1) + ' 月';
+
+  var eventsByDate = {};
+  window.__regs.forEach(function (r) {
+    if (!eventsByDate[r.activityDate]) eventsByDate[r.activityDate] = [];
+    eventsByDate[r.activityDate].push(r);
+  });
+
+  var firstOfMonth = new Date(year, month, 1);
+  var startWeekday = firstOfMonth.getDay();
+  var daysInMonth = new Date(year, month + 1, 0).getDate();
+  var daysInPrevMonth = new Date(year, month, 0).getDate();
+
+  var t = new Date();
+  var todayStr = t.getFullYear() + '-' + pad(t.getMonth() + 1, 2) + '-' + pad(t.getDate(), 2);
+
+  var cells = [];
+  for (var i = 0; i < startWeekday; i++) cells.push({ day: daysInPrevMonth - startWeekday + 1 + i, otherMonth: true, dateStr: null });
+  for (var d = 1; d <= daysInMonth; d++) cells.push({ day: d, otherMonth: false, dateStr: year + '-' + pad(month + 1, 2) + '-' + pad(d, 2) });
+  var nextMonthDay = 1;
+  while (cells.length % 7 !== 0) { cells.push({ day: nextMonthDay, otherMonth: true, dateStr: null }); nextMonthDay += 1; }
+
+  var weekdayHeaders = ['日', '一', '二', '三', '四', '五', '六'];
+  var html = '<table class="calendar-table"><thead><tr>';
+  weekdayHeaders.forEach(function (w) { html += '<th>' + w + '</th>'; });
+  html += '</tr></thead><tbody>';
+
+  for (var row = 0; row < cells.length / 7; row++) {
+    html += '<tr>';
+    for (var col = 0; col < 7; col++) {
+      var cell = cells[row * 7 + col];
+      var isToday = cell.dateStr === todayStr;
+      var classes = ['cal-cell'];
+      if (cell.otherMonth) classes.push('other-month');
+      if (isToday) classes.push('today');
+
+      var dayEvents = cell.dateStr ? (eventsByDate[cell.dateStr] || []) : [];
+      var eventsHtml = dayEvents.map(function (r) {
+        var plain = statusLabel(r.status).replace(/<[^>]+>/g, '');
+        return '<span class="cal-event ' + statusClass(r.status) + '" title="' + escapeHtml(r.groupName) + '（' + plain + '）" onclick="window.switchToDetailFromCalendar(\'' + r.code + '\')">' + escapeHtml(r.groupName) + '</span>';
+      }).join('');
+
+      html += '<td class="' + classes.join(' ') + '"><div class="cal-daynum">' + cell.day + '</div>' + eventsHtml + '</td>';
+    }
+    html += '</tr>';
+  }
+  html += '</tbody></table>';
+  grid.innerHTML = html;
+}
+
+window.updateStatus = function (code, status) {
+  var regs = loadRegs();
+  var rec = regs.find(function (r) { return r.code === code; });
+  if (!rec) return;
+  rec.status = status;
+  if (rec.status === 'confirmed' && !rec.confirmedAt) rec.confirmedAt = new Date().toISOString();
+  rec.updatedAt = new Date().toISOString();
+  rec.editHistory.push({ at: rec.updatedAt, note: '狀態設為「' + STATUS_LABELS[rec.status] + '」' });
+  saveRegs(regs);
+  loadList();
+};
+
+window.switchToDetailFromCalendar = function (code) {
+  viewTabList.click();
+  window.showDetail(code);
+};
+
+window.showDetail = function (code) {
+  var rec = window.__regs.find(function (r) { return r.code === code; });
+  if (!rec) return;
+  var container = document.getElementById('detailContainer');
+
+  function donationText() {
+    if (!rec.hasDonation) return '否';
+    var parts = [];
+    if (rec.donationMoney) parts.push('捐款' + (rec.donationMoneyReceipt ? '（需收據）' : '（不需收據）') + (rec.donationMoneyNote ? '，備註：' + escapeHtml(rec.donationMoneyNote) : ''));
+    if (rec.donationGoods) parts.push('捐物' + (rec.donationGoodsReceipt ? '（需收據）' : '（不需收據）') + (rec.donationGoodsNote ? '，備註：' + escapeHtml(rec.donationGoodsNote) : ''));
+    return parts.join('、') || '是';
+  }
+
+  container.innerHTML =
+    '<div class="card">' +
+    '<h2>代號 ' + rec.code + ' 詳細資訊 ' + statusLabel(rec.status) + '</h2>' +
+    '<div class="detail-row"><span>團體名稱</span><span>' + escapeHtml(rec.groupName) + '</span></div>' +
+    '<div class="detail-row"><span>團體人數</span><span>' + groupSizeText(rec) + '</span></div>' +
+    '<div class="detail-row"><span>活動日期</span><span>' + rec.activityDate + '</span></div>' +
+    '<div class="detail-row"><span>活動時段</span><span>' + timeSlotText(rec) + '</span></div>' +
+    '<div class="detail-row"><span>活動地點</span><span>' + (rec.activityLocation ? escapeHtml(rec.activityLocation) : '-') + '</span></div>' +
+    (rec.supportStaff ? '<div class="detail-row"><span>假日支援人力</span><span>' + escapeHtml(rec.supportStaff) + '</span></div>' : '') +
+    '<div class="detail-row"><span>活動性質</span><span>' + activityTypesText(rec) + '</span></div>' +
+    '<div class="detail-row"><span>需要感謝狀</span><span>' + (rec.needCertificate ? ('是' + (rec.certificateCount ? '（' + rec.certificateCount + ' 張）' : '')) : '否') + '</span></div>' +
+    (rec.needCertificate && (rec.certificateTitles || []).some(Boolean) ? '<div class="detail-row"><span>感謝狀抬頭</span><span>' + (rec.certificateTitles || []).map(function (t, i) { return t ? escapeHtml(t) : ('（第 ' + (i + 1) + ' 張未填）'); }).join('、') + '</span></div>' : '') +
+    (rec.needCertificate && rec.certificateContent ? '<div class="detail-row"><span>感謝狀內容需求</span><span>' + escapeHtml(rec.certificateContent) + '</span></div>' : '') +
+    '<div class="detail-row"><span>捐款或捐物</span><span>' + donationText() + '</span></div>' +
+    '<div class="detail-row"><span>停車於本機構</span><span>' + (rec.needParking ? ('是（' + rec.parkingCount + ' 輛）') : '否') + '</span></div>' +
+    (rec.needParking ? '<div class="detail-row"><span>停放位置</span><span>' + (rec.parkingCars || []).map(function (c) { return (c.gate === 'front' ? '前門' : '後門') + (c.plate ? '（' + escapeHtml(c.plate) + '）' : ''); }).join('、') + '</span></div>' : '') +
+    (rec.remark ? '<div class="detail-row"><span>備註</span><span>' + escapeHtml(rec.remark) + '</span></div>' : '') +
+    '<div class="detail-row"><span>建立時間</span><span>' + new Date(rec.createdAt).toLocaleString('zh-TW') + '</span></div>' +
+    '<div class="detail-row"><span>最後更新</span><span>' + new Date(rec.updatedAt).toLocaleString('zh-TW') + '</span></div>' +
+    (rec.confirmedAt ? '<div class="detail-row"><span>確認時間</span><span>' + new Date(rec.confirmedAt).toLocaleString('zh-TW') + '</span></div>' : '') +
+    '<h2 style="margin-top:18px;">異動紀錄</h2>' +
+    (rec.editHistory.length ? rec.editHistory.map(function (h) { return '<div class="detail-row"><span>' + new Date(h.at).toLocaleString('zh-TW') + '</span><span>' + escapeHtml(h.note) + '</span></div>'; }).join('') : '<p class="hint">無</p>') +
+    '<div style="margin-top:16px; display:flex; gap:10px; flex-wrap:wrap;">' +
+    '<button class="btn-secondary" onclick="window.showEditForm(\'' + rec.code + '\')">編輯</button>' +
+    (rec.needCertificate ? '<button class="btn-secondary" onclick="window.downloadCertificateText(\'' + rec.code + '\')">感謝狀文字檔</button>' : '') +
+    '</div></div>';
+
+  container.scrollIntoView({ behavior: 'smooth' });
+};
+
+window.downloadCertificateText = async function (code) {
+  var rec = window.__regs.find(function (r) { return r.code === code; });
+  if (!rec || !rec.needCertificate) return;
+
+  var titles = (rec.certificateTitles || []).filter(Boolean);
+  var lines = ['感謝狀', '', '感謝狀抬頭：'];
+  if (titles.length) titles.forEach(function (t, i) { lines.push((i + 1) + '. ' + t); });
+  else lines.push('（未填寫）');
+  lines.push('', '感謝狀內容需求：', rec.certificateContent || '（未填寫）');
+  var text = lines.join('\n');
+  var filename = '感謝狀_' + rec.groupName + '_' + rec.code + '.txt';
+
+  try {
+    var downloads = await claude.use('downloads');
+    if (!downloads) { alert('此檢視環境不支援檔案下載。'); return; }
+    await downloads.save({ filename: filename, data: text });
+  } catch (e) {
+    if (e && e.code !== 'declined') alert('下載失敗：' + (e && e.message ? e.message : '請稍後再試'));
+  }
+};
+
+window.showEditForm = function (code) {
+  var rec = window.__regs.find(function (r) { return r.code === code; });
+  if (!rec) return;
+  var container = document.getElementById('detailContainer');
+  function typeChecked(t) { return rec.activityTypes.indexOf(t) !== -1 ? 'checked' : ''; }
+
+  container.innerHTML =
+    '<div class="card"><h2>編輯代號 ' + rec.code + '</h2>' +
+    '<div class="error-box" id="errBoxEdit"><ul id="errListEdit"></ul></div>' +
+    '<label class="field-label">登記狀態 *</label>' +
+    '<select id="e_status">' +
+    '<option value="pending" ' + (rec.status === 'pending' ? 'selected' : '') + '>聯繫中</option>' +
+    '<option value="confirmed" ' + (rec.status === 'confirmed' ? 'selected' : '') + '>確認</option>' +
+    '<option value="cancelled" ' + (rec.status === 'cancelled' ? 'selected' : '') + '>取消</option>' +
+    '<option value="completed" ' + (rec.status === 'completed' ? 'selected' : '') + '>完成</option>' +
+    '</select>' +
+    '<label class="field-label">團體名稱 *</label><input type="text" id="e_groupName" value="' + escapeHtml(rec.groupName) + '">' +
+    '<label class="field-label">團體人數 *</label><div class="time-inputs">' +
+    '<input type="number" id="e_groupSizeMin" min="1" value="' + rec.groupSizeMin + '"> <span>至</span> ' +
+    '<input type="number" id="e_groupSizeMax" min="1" value="' + rec.groupSizeMax + '"></div>' +
+    '<label class="field-label">活動日期 *</label><input type="date" id="e_activityDate" value="' + rec.activityDate + '">' +
+    '<label class="field-label">活動地點（自填）</label><input type="text" id="e_activityLocation" value="' + escapeHtml(rec.activityLocation || '') + '" placeholder="請填寫活動地點">' +
+    '<label class="field-label">活動時間 *</label><div class="time-inputs">' +
+    '<input type="time" id="e_startTime" value="' + (rec.startTime || '') + '"> <span>至</span> ' +
+    '<input type="time" id="e_endTime" value="' + (rec.endTime || '') + '"></div>' +
+    '<div class="sub-panel ' + (isWeekend(rec.activityDate) ? 'show' : '') + '" id="e_weekendPanel">' +
+    '<div class="hint">活動日為假日，如需支援人力請填寫</div>' +
+    '<label class="field-label">假日支援人力（可不填）</label><input type="text" id="e_supportStaff" value="' + escapeHtml(rec.supportStaff || '') + '"></div>' +
+    '<label class="field-label">活動性質 *（可複選）</label><div class="choice-row">' +
+    '<label><input type="checkbox" class="e_actType" value="唱歌" ' + typeChecked('唱歌') + '> 唱歌</label>' +
+    '<label><input type="checkbox" class="e_actType" value="跳舞" ' + typeChecked('跳舞') + '> 跳舞</label>' +
+    '<label><input type="checkbox" class="e_actType" value="互動" ' + typeChecked('互動') + '> 互動</label></div>' +
+    '<label class="field-label">其他（自行填寫）</label><input type="text" id="e_activityTypeOther" value="' + escapeHtml(rec.activityTypeOther || '') + '">' +
+    '<label class="field-label">是否需要感謝狀 *</label><div class="choice-row">' +
+    '<label><input type="radio" name="e_needCertificate" value="no" ' + (!rec.needCertificate ? 'checked' : '') + '> 否</label>' +
+    '<label><input type="radio" name="e_needCertificate" value="yes" ' + (rec.needCertificate ? 'checked' : '') + '> 是</label></div>' +
+    '<div class="sub-panel ' + (rec.needCertificate ? 'show' : '') + '" id="e_certPanel">' +
+    '<label class="field-label">張數（可不填）</label><input type="number" id="e_certificateCount" min="0" value="' + (rec.certificateCount || '') + '">' +
+    '<label class="field-label">抬頭（可不填，依張數顯示對應欄位）</label><div class="plate-grid" id="e_certificateTitlesContainer"></div>' +
+    '<label class="field-label">感謝狀內容需求</label><textarea id="e_certificateContent">' + escapeHtml(rec.certificateContent || '') + '</textarea></div>' +
+    '<label class="field-label">是否捐款或捐物 *</label><div class="choice-row">' +
+    '<label><input type="radio" name="e_hasDonation" value="no" ' + (!rec.hasDonation ? 'checked' : '') + '> 否</label>' +
+    '<label><input type="radio" name="e_hasDonation" value="yes" ' + (rec.hasDonation ? 'checked' : '') + '> 是</label></div>' +
+    '<div class="sub-panel ' + (rec.hasDonation ? 'show' : '') + '" id="e_donationPanel">' +
+    '<label class="field-label"><input type="checkbox" id="e_donationMoney" ' + (rec.donationMoney ? 'checked' : '') + '> 捐款</label>' +
+    '<div class="sub-panel ' + (rec.donationMoney ? 'show' : '') + '" id="e_donationMoneyReceiptPanel" style="margin-left:20px;">' +
+    '<label><input type="checkbox" id="e_donationMoneyReceipt" ' + (rec.donationMoneyReceipt ? 'checked' : '') + '> 需要收據</label>' +
+    '<input type="text" id="e_donationMoneyNote" value="' + escapeHtml(rec.donationMoneyNote || '') + '" placeholder="備註（可不填）" style="margin-top:8px;"></div>' +
+    '<label class="field-label"><input type="checkbox" id="e_donationGoods" ' + (rec.donationGoods ? 'checked' : '') + '> 捐物</label>' +
+    '<div class="sub-panel ' + (rec.donationGoods ? 'show' : '') + '" id="e_donationGoodsReceiptPanel" style="margin-left:20px;">' +
+    '<label><input type="checkbox" id="e_donationGoodsReceipt" ' + (rec.donationGoodsReceipt ? 'checked' : '') + '> 需要收據</label>' +
+    '<input type="text" id="e_donationGoodsNote" value="' + escapeHtml(rec.donationGoodsNote || '') + '" placeholder="備註（可不填）" style="margin-top:8px;"></div></div>' +
+    '<label class="field-label">是否停車於本機構 *</label><div class="choice-row">' +
+    '<label><input type="radio" name="e_needParking" value="no" ' + (!rec.needParking ? 'checked' : '') + '> 否</label>' +
+    '<label><input type="radio" name="e_needParking" value="yes" ' + (rec.needParking ? 'checked' : '') + '> 是</label></div>' +
+    '<div class="sub-panel ' + (rec.needParking ? 'show' : '') + '" id="e_parkingPanel">' +
+    '<div class="hint">本院保全會進行管制</div>' +
+    '<label class="field-label">停車數量 *</label><input type="number" id="e_parkingCount" min="0" value="' + (rec.parkingCount || '') + '">' +
+    '<label class="field-label">車輛資訊（車牌可不填，停放位置為必填）</label><div class="plate-grid" id="e_plateNumbersContainer"></div></div>' +
+    '<label class="field-label">備註（可自行填打想要的內容或注意事項）</label><textarea id="e_remark">' + escapeHtml(rec.remark || '') + '</textarea>' +
+    '<div style="margin-top:16px; display:flex; gap:10px; flex-wrap:wrap;">' +
+    '<button class="btn-primary" id="saveEditBtn">儲存修改</button>' +
+    '<button class="btn-secondary" onclick="window.showDetail(\'' + rec.code + '\')">取消編輯</button>' +
+    '<button class="btn-danger" onclick="window.deleteActivity(\'' + rec.code + '\')">刪除</button>' +
+    '</div></div>';
+
+  container.scrollIntoView({ behavior: 'smooth' });
+
+  renderCertificateTitles('e_certificateTitlesContainer', rec.certificateCount, rec.certificateTitles);
+  document.querySelectorAll('input[name="e_needCertificate"]').forEach(function (el) {
+    el.addEventListener('change', function () {
+      var show = el.value === 'yes' && el.checked;
+      document.getElementById('e_certPanel').classList.toggle('show', show);
+      if (show) renderCertificateTitles('e_certificateTitlesContainer', document.getElementById('e_certificateCount').value, rec.certificateTitles);
+    });
+  });
+  document.getElementById('e_certificateCount').addEventListener('input', function () {
+    renderCertificateTitles('e_certificateTitlesContainer', document.getElementById('e_certificateCount').value);
+  });
+  document.querySelectorAll('input[name="e_hasDonation"]').forEach(function (el) {
+    el.addEventListener('change', function () {
+      document.getElementById('e_donationPanel').classList.toggle('show', el.value === 'yes' && el.checked);
+    });
+  });
+  document.getElementById('e_donationMoney').addEventListener('change', function () {
+    document.getElementById('e_donationMoneyReceiptPanel').classList.toggle('show', this.checked);
+  });
+  document.getElementById('e_donationGoods').addEventListener('change', function () {
+    document.getElementById('e_donationGoodsReceiptPanel').classList.toggle('show', this.checked);
+  });
+  renderParkingCars('e_plateNumbersContainer', rec.parkingCount, rec.parkingCars);
+  document.querySelectorAll('input[name="e_needParking"]').forEach(function (el) {
+    el.addEventListener('change', function () {
+      var show = el.value === 'yes' && el.checked;
+      document.getElementById('e_parkingPanel').classList.toggle('show', show);
+      if (show) renderParkingCars('e_plateNumbersContainer', document.getElementById('e_parkingCount').value, rec.parkingCars);
+    });
+  });
+  document.getElementById('e_parkingCount').addEventListener('input', function () {
+    renderParkingCars('e_plateNumbersContainer', document.getElementById('e_parkingCount').value);
+  });
+  document.getElementById('e_activityDate').addEventListener('change', function () {
+    document.getElementById('e_weekendPanel').classList.toggle('show', isWeekend(document.getElementById('e_activityDate').value));
+  });
+
+  document.getElementById('saveEditBtn').addEventListener('click', function () {
+    var errBox = document.getElementById('errBoxEdit');
+    errBox.classList.remove('show');
+    var needCertEl = document.querySelector('input[name="e_needCertificate"]:checked');
+    var hasDonationEl = document.querySelector('input[name="e_hasDonation"]:checked');
+    var needParkingEl = document.querySelector('input[name="e_needParking"]:checked');
+    var activityTypes = Array.from(document.querySelectorAll('.e_actType:checked')).map(function (el) { return el.value; });
+
+    var payload = {
+      status: document.getElementById('e_status').value,
+      groupName: document.getElementById('e_groupName').value,
+      groupSizeMin: document.getElementById('e_groupSizeMin').value,
+      groupSizeMax: document.getElementById('e_groupSizeMax').value,
+      activityDate: document.getElementById('e_activityDate').value,
+      activityLocation: document.getElementById('e_activityLocation').value,
+      startTime: document.getElementById('e_startTime').value,
+      endTime: document.getElementById('e_endTime').value,
+      supportStaff: document.getElementById('e_supportStaff').value,
+      activityTypes: activityTypes,
+      activityTypeOther: document.getElementById('e_activityTypeOther').value,
+      needCertificate: needCertEl ? needCertEl.value === 'yes' : undefined,
+      certificateCount: document.getElementById('e_certificateCount').value,
+      certificateTitles: Array.from(document.querySelectorAll('#e_certificateTitlesContainer .certTitleInput')).map(function (el) { return el.value; }),
+      certificateContent: document.getElementById('e_certificateContent').value,
+      hasDonation: hasDonationEl ? hasDonationEl.value === 'yes' : undefined,
+      donationMoney: document.getElementById('e_donationMoney').checked,
+      donationMoneyReceipt: document.getElementById('e_donationMoneyReceipt').checked,
+      donationMoneyNote: document.getElementById('e_donationMoneyNote').value,
+      donationGoods: document.getElementById('e_donationGoods').checked,
+      donationGoodsReceipt: document.getElementById('e_donationGoodsReceipt').checked,
+      donationGoodsNote: document.getElementById('e_donationGoodsNote').value,
+      needParking: needParkingEl ? needParkingEl.value === 'yes' : undefined,
+      parkingCount: document.getElementById('e_parkingCount').value,
+      parkingCars: Array.from(document.querySelectorAll('#e_plateNumbersContainer .parking-car-row')).map(function (row) {
+        return { plate: row.querySelector('.plateInput').value, gate: row.querySelector('.gateSelect').value };
+      }),
+      remark: document.getElementById('e_remark').value
+    };
+
+    var errors = validatePayload(payload, { freeTime: true });
+    if (!STATUS_VALUES.includes(payload.status)) errors.push('請選擇狀態');
+    if (errors.length) {
+      document.getElementById('errListEdit').innerHTML = errors.map(function (e) { return '<li>' + escapeHtml(e) + '</li>'; }).join('');
+      errBox.classList.add('show');
+      errBox.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      return;
+    }
+
+    var regs = loadRegs();
+    var target = regs.find(function (r) { return r.code === rec.code; });
+    if (!target) return;
+    var statusChanged = target.status !== payload.status;
+    Object.assign(target, sanitizeRecord(payload, { freeTime: true }));
+    target.status = payload.status;
+    if (target.status === 'confirmed' && !target.confirmedAt) target.confirmedAt = new Date().toISOString();
+    target.updatedAt = new Date().toISOString();
+    target.editHistory.push({ at: target.updatedAt, note: statusChanged ? ('登記內容已修改，狀態設為「' + STATUS_LABELS[target.status] + '」') : '登記內容已修改' });
+    saveRegs(regs);
+
+    loadList();
+    window.showDetail(rec.code);
+    alert('修改已儲存。');
+  });
+};
+
+window.deleteActivity = function (code) {
+  if (!confirm('確定要刪除代號 ' + code + ' 的活動登記嗎？此動作無法復原。')) return;
+  var regs = loadRegs();
+  var index = regs.findIndex(function (r) { return r.code === code; });
+  if (index === -1) return;
+  regs.splice(index, 1);
+  saveRegs(regs);
+  document.getElementById('detailContainer').innerHTML = '';
+  loadList();
+};
+
+})();
+</script>
+</body>
+</html>
