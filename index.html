@@ -356,6 +356,7 @@ th { color: var(--muted); font-weight: 400; }
   body * { visibility: hidden; }
   #printListArea, #printListArea * { visibility: visible; }
   #printListArea { position: absolute; left: 0; top: 0; width: 100%; }
+  #printListWrap.hidden { display: block !important; }
 }
 </style>
 </head>
@@ -364,7 +365,6 @@ th { color: var(--muted); font-weight: 400; }
 <header class="site-header">
   <p class="eyebrow">財團法人私立八德教養院</p>
   <h1>團體活動登記系統</h1>
-  <p>安排到院活動前，請先完成登記；社工組將於後台確認並回覆。</p>
 </header>
 
 <nav class="nav">
@@ -388,10 +388,8 @@ th { color: var(--muted); font-weight: 400; }
         <input type="number" id="groupSizeMin" min="1" placeholder="最少人數"> <span>至</span>
         <input type="number" id="groupSizeMax" min="1" placeholder="最多人數">
       </div>
-    </div>
 
-    <div class="card">
-      <h2>活動時間</h2>
+      <h2 style="margin-top:18px;">活動時間</h2>
       <label class="field-label">活動日期 *</label>
       <input type="date" id="activityDate">
       <label class="field-label">時段 *</label>
@@ -404,10 +402,10 @@ th { color: var(--muted); font-weight: 400; }
         <label class="field-label">假日支援人力（可不填）</label>
         <input type="text" id="supportStaff" placeholder="請填寫需要的支援人力，如無需求可留空">
       </div>
-    </div>
+      <label class="field-label">活動地點（可不填）</label>
+      <input type="text" id="activityLocation" placeholder="請填寫活動地點">
 
-    <div class="card">
-      <h2>活動性質 *（可複選）</h2>
+      <h2 style="margin-top:18px;">活動性質 *（可複選）</h2>
       <div class="choice-row">
         <label><input type="checkbox" class="actType" value="唱歌"> 唱歌</label>
         <label><input type="checkbox" class="actType" value="跳舞"> 跳舞</label>
@@ -472,6 +470,9 @@ th { color: var(--muted); font-weight: 400; }
       <h2>備註</h2>
       <label class="field-label">備註（可自行填打想要的內容或注意事項）</label>
       <textarea id="remark" placeholder="如有其他需求或注意事項，請填寫於此"></textarea>
+      <label class="field-label">備註圖片（可不填）</label>
+      <input type="file" id="remarkImage" accept="image/*">
+      <div id="remarkImagePreview"></div>
     </div>
 
     <button type="submit" class="btn-primary">送出登記</button>
@@ -513,7 +514,11 @@ th { color: var(--muted); font-weight: 400; }
     <div class="card" id="listView">
       <div class="admin-head">
         <h2 style="border:none;padding:0;margin:0;">登記清單</h2>
-        <button class="btn-secondary" id="printListBtn">列印清單</button>
+        <div style="display:flex; gap:8px;">
+          <button class="btn-secondary btn-sm" id="printListBtn">列印清單</button>
+          <button class="btn-secondary btn-sm" id="printCertificateBtn">列印感謝狀清單</button>
+          <button class="btn-secondary btn-sm" id="printActivityBtn">列印活動</button>
+        </div>
       </div>
       <div id="listContainer" class="table-scroll"></div>
     </div>
@@ -678,7 +683,8 @@ function sanitizeRecord(body, opts) {
       ? (Array.isArray(body.parkingCars) ? body.parkingCars : []).slice(0, parkingCount).map(function (c) { return { plate: String((c && c.plate) || '').trim(), gate: c && c.gate }; })
       : [],
     supportStaff: isWeekend(body.activityDate) ? String(body.supportStaff || '').trim() : '',
-    remark: body.remark ? String(body.remark).trim() : ''
+    remark: body.remark ? String(body.remark).trim() : '',
+    remarkImage: body.remarkImage ? String(body.remarkImage) : ''
   };
 }
 
@@ -803,6 +809,19 @@ donationGoods.addEventListener('change', function () {
   document.getElementById('donationGoodsReceiptPanel').classList.toggle('show', donationGoods.checked);
 });
 
+var remarkImageData = '';
+document.getElementById('remarkImage').addEventListener('change', function (e) {
+  var file = e.target.files && e.target.files[0];
+  var preview = document.getElementById('remarkImagePreview');
+  if (!file) { remarkImageData = ''; preview.innerHTML = ''; return; }
+  var reader = new FileReader();
+  reader.onload = function () {
+    remarkImageData = reader.result;
+    preview.innerHTML = '<img src="' + remarkImageData + '" style="max-width:160px;max-height:160px;border-radius:6px;margin-top:8px;">';
+  };
+  reader.readAsDataURL(file);
+});
+
 function collectFormData() {
   var timeSlotEl = document.querySelector('input[name="timeSlot"]:checked');
   var needCertEl = document.querySelector('input[name="needCertificate"]:checked');
@@ -817,6 +836,7 @@ function collectFormData() {
     activityDate: document.getElementById('activityDate').value,
     timeSlot: timeSlotEl ? timeSlotEl.value : null,
     supportStaff: document.getElementById('supportStaff').value,
+    activityLocation: document.getElementById('activityLocation').value,
     activityTypes: activityTypes,
     activityTypeOther: document.getElementById('activityTypeOther').value,
     needCertificate: needCertEl ? needCertEl.value === 'yes' : undefined,
@@ -835,7 +855,8 @@ function collectFormData() {
     parkingCars: Array.from(document.querySelectorAll('#plateNumbersContainer .parking-car-row')).map(function (row) {
       return { plate: row.querySelector('.plateInput').value, gate: row.querySelector('.gateSelect').value };
     }),
-    remark: document.getElementById('remark').value
+    remark: document.getElementById('remark').value,
+    remarkImage: remarkImageData
   };
 }
 
@@ -870,6 +891,8 @@ document.getElementById('regForm').addEventListener('submit', function (e) {
   document.getElementById('regForm').classList.add('hidden');
   document.getElementById('successCode').textContent = code;
   document.getElementById('successBox').classList.remove('hidden');
+  remarkImageData = '';
+  document.getElementById('remarkImagePreview').innerHTML = '';
 });
 
 // ---------------------------------------------------------------------
@@ -999,12 +1022,47 @@ document.getElementById('printListBtn').addEventListener('click', function () {
     '<th>活動日期</th><th>時段</th><th>單位</th><th>活動性質</th><th>地點</th><th>活動單位人數</th><th>備註</th>' +
     '</tr></thead><tbody>' + (rows || '<tr><td colspan="7">目前尚無登記資料</td></tr>') + '</tbody></table></div>';
 
-  document.getElementById('printListWrap').classList.remove('hidden');
-  document.getElementById('printListWrap').scrollIntoView({ behavior: 'smooth' });
-  try { window.print(); } catch (e) { /* some embedded contexts block this; the preview above still shows */ }
+  document.getElementById('printListWrap').classList.add('hidden');
+  try { window.print(); } catch (e) { /* some embedded contexts block this */ }
 });
 document.getElementById('hidePrintListBtn').addEventListener('click', function () {
   document.getElementById('printListWrap').classList.add('hidden');
+});
+
+document.getElementById('printCertificateBtn').addEventListener('click', function () {
+  var regs = (window.__regs || []).filter(function (r) { return r.needCertificate; });
+  if (!regs.length) { alert('目前尚無需要感謝狀的登記'); return; }
+
+  var rows = regs.map(function (r) {
+    return '<div class="detail-row" style="cursor:pointer;" onclick="window.printCertificateFor(\'' + r.code + '\')">' +
+      '<span>' + r.activityDate + '　' + activityTypesText(r) + '　' + escapeHtml(r.groupName) + '</span><span>' + r.code + '</span></div>';
+  }).join('');
+
+  document.getElementById('printListArea').innerHTML =
+    '<div class="card"><h2>選擇要列印感謝狀的登記</h2>' + rows + '</div>';
+  document.getElementById('printListWrap').classList.remove('hidden');
+  document.getElementById('printListWrap').scrollIntoView({ behavior: 'smooth' });
+});
+
+document.getElementById('printActivityBtn').addEventListener('click', function () {
+  var regs = window.__regs || [];
+  var cards = regs.map(function (r) {
+    return '<div class="card"><h2>活動</h2>' +
+      '<div class="detail-row"><span>團體名稱</span><span>' + escapeHtml(r.groupName) + '</span></div>' +
+      '<div class="detail-row"><span>團體人數</span><span>' + groupSizeText(r) + '</span></div>' +
+      '<div class="detail-row"><span>活動日期</span><span>' + r.activityDate + '</span></div>' +
+      '<div class="detail-row"><span>活動時段</span><span>' + timeSlotText(r) + '</span></div>' +
+      '<div class="detail-row"><span>活動地點</span><span>' + (r.activityLocation ? escapeHtml(r.activityLocation) : '-') + '</span></div>' +
+      '<div class="detail-row"><span>活動性質</span><span>' + activityTypesText(r) + '</span></div>' +
+      '<div class="detail-row"><span>備註</span><span>' + (r.remark ? escapeHtml(r.remark) : '-') + '</span></div>' +
+      (r.remarkImage ? '<div class="detail-row"><span>備註圖片</span><span><img src="' + r.remarkImage + '" style="max-width:160px;max-height:160px;border-radius:6px;"></span></div>' : '') +
+      '</div>';
+  }).join('');
+
+  document.getElementById('printListArea').innerHTML = cards || '<div class="card">目前尚無登記資料</div>';
+
+  document.getElementById('printListWrap').classList.add('hidden');
+  try { window.print(); } catch (e) { /* some embedded contexts block this */ }
 });
 
 var viewTabList = document.getElementById('viewTabList');
@@ -1144,50 +1202,34 @@ window.showDetail = function (code) {
     '<div class="detail-row"><span>停車於本機構</span><span>' + (rec.needParking ? ('是（' + rec.parkingCount + ' 輛）') : '否') + '</span></div>' +
     (rec.needParking ? '<div class="detail-row"><span>停放位置</span><span>' + (rec.parkingCars || []).map(function (c) { return (c.gate === 'front' ? '前門' : '後門') + (c.plate ? '（' + escapeHtml(c.plate) + '）' : ''); }).join('、') + '</span></div>' : '') +
     (rec.remark ? '<div class="detail-row"><span>備註</span><span>' + escapeHtml(rec.remark) + '</span></div>' : '') +
+    (rec.remarkImage ? '<div class="detail-row"><span>備註圖片</span><span><img src="' + rec.remarkImage + '" style="max-width:160px;max-height:160px;border-radius:6px;"></span></div>' : '') +
     '<div class="detail-row"><span>建立時間</span><span>' + new Date(rec.createdAt).toLocaleString('zh-TW') + '</span></div>' +
     '<div class="detail-row"><span>最後更新</span><span>' + new Date(rec.updatedAt).toLocaleString('zh-TW') + '</span></div>' +
     (rec.confirmedAt ? '<div class="detail-row"><span>確認時間</span><span>' + new Date(rec.confirmedAt).toLocaleString('zh-TW') + '</span></div>' : '') +
     '<h2 style="margin-top:18px;">異動紀錄</h2>' +
     (rec.editHistory.length ? rec.editHistory.map(function (h) { return '<div class="detail-row"><span>' + new Date(h.at).toLocaleString('zh-TW') + '</span><span>' + escapeHtml(h.note) + '</span></div>'; }).join('') : '<p class="hint">無</p>') +
-    '<div style="margin-top:16px; display:flex; gap:10px; flex-wrap:wrap;">' +
-    '<button class="btn-secondary" onclick="window.showEditForm(\'' + rec.code + '\')">編輯</button>' +
-    (rec.needCertificate ? '<button class="btn-secondary" onclick="window.downloadCertificateText(\'' + rec.code + '\')">感謝狀文字檔</button>' : '') +
-    '</div></div>';
+    '</div>';
 
   container.scrollIntoView({ behavior: 'smooth' });
 };
 
-window.downloadCertificateText = async function (code) {
-  var rec = window.__regs.find(function (r) { return r.code === code; });
-  if (!rec || !rec.needCertificate) return;
+window.printCertificateFor = function (code) {
+  var rec = (window.__regs || []).find(function (r) { return r.code === code; });
+  if (!rec) return;
 
   var titles = (rec.certificateTitles || []).filter(Boolean);
-  var lines = ['感謝狀', '', '感謝狀抬頭：'];
-  if (titles.length) titles.forEach(function (t, i) { lines.push((i + 1) + '. ' + t); });
-  else lines.push('（未填寫）');
-  lines.push('', '感謝狀內容需求：', rec.certificateContent || '（未填寫）');
-  var text = lines.join('\n');
-  var filename = '感謝狀_' + rec.groupName + '_' + rec.code + '.txt';
+  var titlesHtml = titles.length
+    ? titles.map(function (t, i) { return '<div class="detail-row"><span>抬頭 ' + (i + 1) + '</span><span>' + escapeHtml(t) + '</span></div>'; }).join('')
+    : '<div class="detail-row"><span>感謝狀抬頭</span><span>（未填寫）</span></div>';
 
-  if (window.claude && typeof window.claude.use === 'function') {
-    try {
-      var downloads = await window.claude.use('downloads');
-      if (downloads) { await downloads.save({ filename: filename, data: text }); return; }
-    } catch (e) {
-      if (e && e.code === 'declined') return;
-      // fall through to the plain-browser download below
-    }
-  }
+  document.getElementById('printListArea').innerHTML =
+    '<div class="card"><h2>感謝狀</h2>' +
+    titlesHtml +
+    '<div class="detail-row"><span>感謝狀內容需求</span><span>' + escapeHtml(rec.certificateContent || '（未填寫）') + '</span></div>' +
+    '</div>';
 
-  var blob = new Blob([text], { type: 'text/plain;charset=utf-8' });
-  var url = URL.createObjectURL(blob);
-  var a = document.createElement('a');
-  a.href = url;
-  a.download = filename;
-  document.body.appendChild(a);
-  a.click();
-  document.body.removeChild(a);
-  URL.revokeObjectURL(url);
+  document.getElementById('printListWrap').classList.add('hidden');
+  try { window.print(); } catch (e) { /* some embedded contexts block this */ }
 };
 
 window.showEditForm = function (code) {
@@ -1250,6 +1292,8 @@ window.showEditForm = function (code) {
     '<label class="field-label">停車數量 *</label><input type="number" id="e_parkingCount" min="0" value="' + (rec.parkingCount || '') + '">' +
     '<label class="field-label">車輛資訊（車牌可不填，停放位置為必填）</label><div class="plate-grid" id="e_plateNumbersContainer"></div></div>' +
     '<label class="field-label">備註（可自行填打想要的內容或注意事項）</label><textarea id="e_remark">' + escapeHtml(rec.remark || '') + '</textarea>' +
+    '<label class="field-label">備註圖片（可不填）</label><input type="file" id="e_remarkImage" accept="image/*">' +
+    '<div id="e_remarkImagePreview">' + (rec.remarkImage ? '<img src="' + rec.remarkImage + '" style="max-width:160px;max-height:160px;border-radius:6px;margin-top:8px;">' : '') + '</div>' +
     '<div style="margin-top:16px; display:flex; gap:10px; flex-wrap:wrap;">' +
     '<button class="btn-primary" id="saveEditBtn">儲存修改</button>' +
     '<button class="btn-secondary" onclick="window.showDetail(\'' + rec.code + '\')">取消編輯</button>' +
@@ -1257,6 +1301,19 @@ window.showEditForm = function (code) {
     '</div></div>';
 
   container.scrollIntoView({ behavior: 'smooth' });
+
+  var editRemarkImageData = rec.remarkImage || '';
+  document.getElementById('e_remarkImage').addEventListener('change', function (e) {
+    var file = e.target.files && e.target.files[0];
+    var preview = document.getElementById('e_remarkImagePreview');
+    if (!file) { editRemarkImageData = ''; preview.innerHTML = ''; return; }
+    var reader = new FileReader();
+    reader.onload = function () {
+      editRemarkImageData = reader.result;
+      preview.innerHTML = '<img src="' + editRemarkImageData + '" style="max-width:160px;max-height:160px;border-radius:6px;margin-top:8px;">';
+    };
+    reader.readAsDataURL(file);
+  });
 
   renderCertificateTitles('e_certificateTitlesContainer', rec.certificateCount, rec.certificateTitles);
   document.querySelectorAll('input[name="e_needCertificate"]').forEach(function (el) {
@@ -1331,7 +1388,8 @@ window.showEditForm = function (code) {
       parkingCars: Array.from(document.querySelectorAll('#e_plateNumbersContainer .parking-car-row')).map(function (row) {
         return { plate: row.querySelector('.plateInput').value, gate: row.querySelector('.gateSelect').value };
       }),
-      remark: document.getElementById('e_remark').value
+      remark: document.getElementById('e_remark').value,
+      remarkImage: editRemarkImageData
     };
 
     var errors = validatePayload(payload, { freeTime: true });
